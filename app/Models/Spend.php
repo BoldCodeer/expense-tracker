@@ -10,6 +10,11 @@ class Spend extends Model
     use HasFactory;
 
     protected $fillable = [
-        'status', 'detail', 'amount'
+        'status', 'detail', 'amount', 'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

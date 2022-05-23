@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2 class="text-center mt-4">KT Collection Expenses Tracking System</h2>
+                <h2 class="text-center mt-4">KT Collection Expenses Monitoring System</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success m-2" href="{{ route('spends.create') }}"> Create New</a>
@@ -17,10 +17,34 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+        <div>
+            <br>
+            <h5 style="text-align: center">INCOME TOTAL AMOUNT: </h5>
+            <div style="text-align: center" >
+                <input style="text-align: center" type="number" value="{{ $income }}" disabled>
+            </div>
+            <br>
+
+            <h5 style="text-align: center">EXPENSE TOTAL AMOUNT: </h5>
+            <div style="text-align: center">
+                <input style="text-align: center" type="number" value="{{ $expense }}" disabled>
+            </div>
+            <br>
+
+            <h5 style="text-align: center">TOTAL AMOUNT: </h5>
+            <div style="text-align: center">
+                <input style="text-align: center" type="number" value="{{ $total }}" disabled>
+            </div>
+            <br>
+            <h5 style="text-align: center">TOTAL PROFIT: </h5>
+            <div style="text-align: center">
+                <input style="text-align: center" type="number" value="{{ $profit }}" disabled>
+            </div>
+            <br>
+        </div>
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
             <th>Status</th>
             <th>Details</th>
             <th>Amount</th>
@@ -28,7 +52,6 @@
         </tr>
         @foreach ($spends as $spend)
             <tr>
-                <td>{{ ++$i }}</td>
                 <td>{{ $spend->status }}</td>
                 <td>{{ $spend->detail }}</td>
                 <td>{{ $spend->amount }}</td>
@@ -49,6 +72,6 @@
         @endforeach
     </table>
 
-    {!! $spends->links() !!}
+{{--    {!! $spends->links() !!}--}}
 
 @endsection

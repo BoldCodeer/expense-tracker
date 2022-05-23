@@ -14,11 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('spends', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('status');
             $table->text('detail');
             $table->integer('amount');
+            $table->integer('total');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
+
+
         });
     }
 

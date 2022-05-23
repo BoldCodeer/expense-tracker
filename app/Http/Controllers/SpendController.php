@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Spend;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SpendController extends Controller
 {
@@ -14,10 +16,22 @@ class SpendController extends Controller
      */
     public function index()
     {
-        $spends = Spend::latest()->paginate(5);
 
-        return view('spends.index',compact('spends'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+//        $spends = Spend::latest()->paginate(5);
+//
+//        return view('spends.index',compact('spends'))
+//                ->with('i', (request()->input('page', 1) - 1) * 5);
+        $user = optional(Auth::user())->id;
+        $spends = Spend::where('user_id',$user)->get();
+        $income = Spend::where('status','IN')->where('user_id',$user)->sum('amount');
+        $expense = Spend::where('status','OUT')->where('user_id',$user)->sum('amount');
+        $total = Spend::where('user_id',$user)->sum('amount');
+        $profit = $income - $expense;
+        if($profit < 0){
+            $profit = 0;
+        }
+
+        return view('spends.index',compact('spends', 'income', 'expense','total', 'profit'));
     }
 
     /**
@@ -42,6 +56,7 @@ class SpendController extends Controller
             'status' => 'required',
             'detail' => 'required',
             'amount' => 'required',
+            'user_id' => 'required',
         ]);
 
         Spend::create($request->all());

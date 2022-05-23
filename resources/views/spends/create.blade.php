@@ -44,7 +44,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong class="m-2">Amount:</strong>
-                    <input type="text" name="amount" class="form-control" placeholder="Name">
+                    <input type="text" name="amount" class="form-control" placeholder="#">
+                    <input type="text" name="user_id" value="{{ Auth::user()->id }}" hidden>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

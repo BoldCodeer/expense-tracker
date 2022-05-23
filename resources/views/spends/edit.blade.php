@@ -45,7 +45,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Amount:</strong>
-                    <input type="text" name="amount" class="form-control" placeholder="{{ $spend->amount }}">
+                    <input type="text" name="amount" class="form-control" value="{{ $spend->amount }}">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
